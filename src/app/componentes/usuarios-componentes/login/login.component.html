@@ -1,0 +1,21 @@
+<section>
+  <h1>Welcome!</h1>
+
+  <form [formGroup]="autenticarse" class="formulario">
+     <div>
+      <label for="nombre">Nombre</label>
+      <input type="text" formControlName="nombre" placeholder="Nombre" id="nombre" class="f">
+    </div>
+    <div>
+      <label for="password">Contraseña</label>
+      <input type="password" formControlName="password" placeholder="Contraseña" id="password" class="f">
+    </div>
+    <div>
+      <input type="button" id="boton" value="Entrar">
+    </div>
+  </form>
+  <div class="registro">
+    <button (click)="registrar()" id="registro">Registrarse</button>
+  </div>
+</section>
+

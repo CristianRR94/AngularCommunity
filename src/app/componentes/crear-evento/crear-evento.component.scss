@@ -1,0 +1,42 @@
+section{
+  box-sizing: border-box;
+  width: 90dvw;
+  height: 90dvb;
+  background-color: aliceblue;
+  display: flexbox;
+  flex-wrap: wrap;
+  justify-self: center;
+  justify-items: center;
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 20px;
+}
+
+form{
+  box-sizing: border-box;
+  width: 80dvw;
+  height: 80dvb;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+form>input{
+  margin: 10px, 10px, 10px, 10px;
+  position: relative;
+  width: 60%;
+  height: 4dvh;
+  outline: 1px solid blueviolet;
+  border-radius: 10px;
+}
+
+#boton{
+  margin-top: 10px;
+  cursor: pointer;
+}
+#boton:hover{
+  transform: scale(1.05);
+}

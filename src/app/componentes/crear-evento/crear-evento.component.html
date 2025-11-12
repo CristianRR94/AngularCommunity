@@ -1,0 +1,21 @@
+<section>
+<form [formGroup]="form" (ngSubmit)="crear()" class="form">
+<label for="nombreEvento">Título</label>
+<input type="text" formControlName="nombreEvento" id="nombreEvento">
+<label for="tipoEvento">Tipo de evento</label>
+<input type="text" formControlName="tipoEvento" id="tipoEvento">
+<label for="fecha">Fecha del evento</label>
+<input type="date" formControlName="fechaEvento" id="fecha">
+<label for="info">Información del evento</label>
+<input type="text" formControlName="informacion" id="info">
+<label for="imagen">Imagen</label>
+<input type="file" (change)="onFileSelected($event)" #fileUpload id="imagen" accept="image/*">
+<label for="privado">Privacidad</label>
+<input type="checkbox" formControlName="privado" id="privado">
+<label for="oculto">Visibilidad</label>
+<input type="checkbox" formControlName="oculto" id="oculto">
+<label for="maxNumParticipantes">Número de Participantes</label>
+<input type="number" formControlName="maxNumParticipantes" id="maxNumParticipantes" inputmode="numeric">
+<input type="submit" value="Confirmar" id="boton">
+</form>
+</section>

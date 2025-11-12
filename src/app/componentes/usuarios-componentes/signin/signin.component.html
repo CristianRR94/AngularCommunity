@@ -1,0 +1,69 @@
+<section>
+
+
+  <h1>Crear usuario</h1>
+
+    <form [formGroup]="formulario" (ngSubmit)="crear()" class="formulario">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" placeholder="Nombre" id="nombre"
+        class="f">
+        @if(formulario.get('nombre')?.errors && (formulario.get('nombre')?.touched || formulario.get('nombre')?.dirty)){
+          <div class="error-messages">
+            @if (formulario.get('nombre')?.errors?.['required'] && formulario.get('nombre')?.touched) {
+              <span>Este campo es obligatorio</span>
+            }
+            @if ((formulario.get('nombre')?.errors?.['minlength'] || formulario.get('nombre')?.errors?.['maxlength']) && formulario.get('nombre')?.touched) {
+              <span>El nombre debe tener entre 6 y 20 caracteres</span>
+            }
+            @if (formulario.get('nombre')?.errors?.['nombreExiste'] && formulario.get('nombre')?.touched) {
+              <span>El nombre ya existe</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <label for="password">Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Contraseña" id="password" class="f" required >
+         @if(formulario.get('password')?.errors && (formulario.get('password')?.touched || formulario.get('password')?.dirty)){
+          <div class="error-messages">
+            @if (formulario.get('password')?.errors?.['required']) {
+              <span>Este campo es obligatorio</span>
+            }
+             @if (formulario.get('password')?.errors?.['minlength']) {
+              <span>Mínmo 8 caracteres</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <label for="repetirPassword">Repetir Contraseña</label>
+        <input type="password" formControlName="repetirPassword" placeholder="Repetir contraseña" id="repetirPassword" class="f" >
+           @if(formulario.errors?.['isNotValid']  &&  formulario.get('repetirPassword')?.touched ){
+          <div class="error-messages">
+              <span>La contraseña no coincide</span>
+          </div>
+        }
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" placeholder="Email" id="email" class="f">
+         @if(formulario.get('email')?.errors && (formulario.get('email')?.touched || formulario.get('email')?.dirty)){
+          <div class="error-messages">
+            @if (formulario.get('email')?.errors?.['required']) {
+              <span>Este campo es obligatorio</span>
+            }
+            @if (formulario.get('email')?.errors?.['email']) {
+              <span>Introduce un email válido</span>
+            }
+             @if (formulario.get('email')?.errors?.['emailExiste'] && formulario.get('email')?.touched) {
+              <span>El email ya existe</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <input type="submit" id="boton" value="Confirmar">
+      </div>
+    </form>
+</section>
