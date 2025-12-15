@@ -1,13 +1,15 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, Output, signal } from '@angular/core';
 import { EventoService } from '../../servicios/evento.service';
 import { map, Observable, reduce } from 'rxjs';
 import { EventoComponent } from "../evento/evento.component";
 import { Evento } from '../../interfaces/evento';
+import { RouterLink } from "@angular/router";
+import e from 'express';
 
 
 @Component({
   selector: 'app-principal',
-  imports: [EventoComponent],
+  imports: [EventoComponent, RouterLink],
   templateUrl: './principal.component.html',
   styleUrl: './principal.component.scss'
 })

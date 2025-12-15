@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, Subscription } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class UsuarioService {
   }
 
   postUsuario(usuario: Usuario): Observable<Usuario>{
-    return this.http.post<Usuario>(this.url, usuario);
+    return this.http.post<Usuario>(`${this.url}/crear`, usuario);
   }
 
   putUsuario(usuario: Usuario): Observable<Usuario>{

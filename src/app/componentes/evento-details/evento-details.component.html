@@ -1,0 +1,19 @@
+<section>
+  @defer (when evento) {
+      <div>
+    <h1>{{evento.nombreEvento}}</h1>
+    <h2>{{evento.fechaEvento}}</h2>
+    <div>
+    <img [src]="'http://localhost:8080/images/' + evento.imagenEvento" alt="evento">
+
+    </div>
+    @for (p of evento.participantesEvento; track $index) {
+      {{p}}
+    }
+
+  </div>
+  }
+   @placeholder {
+      <p>Cargando datos...</p>
+    }
+</section>

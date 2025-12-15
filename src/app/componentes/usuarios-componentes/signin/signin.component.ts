@@ -1,4 +1,4 @@
-import { RepeatedNameValidator } from './../../../directivas/repeated-name.directive';
+import { RepeatedNameValidator } from '../../../directivas/repeated-name.directive';
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordRepeatValidator } from '../../../directivas/password.directive';
@@ -46,14 +46,14 @@ export class SigninComponent implements OnInit, OnDestroy{
     if(this.formulario.valid){
       this.subscripcion = this.usuarioService.postUsuario(this.formulario.value).subscribe(data =>{
           console.log("enviando estos datos: " +data);
-      return data = this.usuario;
-    }), this.router.navigate(['login']);
+      return this.usuario = data;
+    }) , this.router.navigate(['login']) ;
   }
     else if(this.formulario.invalid){
       console.log('Error en los datos');
       this.formulario.markAllAsTouched();
     }
-    else console.log("Algo ha ido MUY mal para acabar aquí");
+    else console.log("Fallo en el envio de datos");
   }
 
   ngOnDestroy(): void {

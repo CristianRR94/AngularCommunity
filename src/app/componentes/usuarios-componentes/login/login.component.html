@@ -1,17 +1,17 @@
 <section>
   <h1>Welcome!</h1>
 
-  <form [formGroup]="autenticarse" class="formulario">
+  <form [formGroup]="autenticarse" class="formulario" (ngSubmit)="autenticar()">
      <div>
       <label for="nombre">Nombre</label>
-      <input type="text" formControlName="nombre" placeholder="Nombre" id="nombre" class="f">
+      <input type="text" formControlName="username" placeholder="Nombre" id="nombre" class="f">
     </div>
     <div>
       <label for="password">Contraseña</label>
       <input type="password" formControlName="password" placeholder="Contraseña" id="password" class="f">
     </div>
     <div>
-      <input type="button" id="boton" value="Entrar">
+      <input type="submit" id="boton" value="Entrar">
     </div>
   </form>
   <div class="registro">

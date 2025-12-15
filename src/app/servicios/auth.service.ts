@@ -1,34 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  protected baseURL = 'http://localhost:4200';
-  protected http = inject(HttpClient);
-  protected router = inject(Router);
 
-  refreshToken(): Observable<string>{
-    const refreshToken = localStorage.getItem('refreshToken');
-    if(!refreshToken){
-      this.logOut();
-    }
-    return this.http.post<{refreshToken: string}>(`${this.baseURL}/token`, {refreshToken})
-    .pipe(map(response => response.refreshToken)
-    , tap((newAccessToken: string)=>{
-      localStorage.setItem('token', newAccessToken);
-    }), catchError(error=>{
-      this.logOut();
-      return throwError(()=>error);
-    }))
+  private http = inject(HttpClient);
+  private route = inject(Router);
+  private url: String = 'http://localhost:8080'
+  private loggedIn: boolean = false;
+
+  login(username: string, password: string){
+    return this.http.post(`${this.url}/api/login`,
+      {username, password},
+      {withCredentials: true}
+    ).pipe(tap(()=>this.loggedIn = true));
   }
 
-  logOut(){
-    localStorage.clear();
-    this.router.navigate(['login']);
+  logout(){
+    this.route.navigate(['/']);
+    return this.http.post(`${this.url}/api/logout`,
+      {},
+      {withCredentials: true}
+    ).pipe(tap(()=>this.loggedIn = false));
   }
-  constructor() { }
+
+  isLoggedIn(){
+    return this.loggedIn;
+  }
+
+checkSession(): Observable<boolean> {
+  return this.http.get("http://localhost:8080/api/me", { 
+    withCredentials: true 
+  }).pipe(
+    map(() => true),
+    catchError(() => of(false))
+  );
+}
+
+
 }

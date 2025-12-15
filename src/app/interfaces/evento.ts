@@ -13,7 +13,7 @@ export interface Evento {
   participantesEvento?: Participante[],
   privado?: boolean,
   oculto?: boolean,
-  maxNumParticipantes: number,
+  maxNumParticipantes?: number,
   created_at?: Date,
   updated_at?: Date,
 }
