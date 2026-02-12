@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+/* import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, Observable, of, tap } from 'rxjs';
@@ -33,8 +33,8 @@ export class AuthService {
   }
 
 checkSession(): Observable<boolean> {
-  return this.http.get("http://localhost:8080/api/me", { 
-    withCredentials: true 
+  return this.http.get("http://localhost:8080/api/me", {
+    withCredentials: true
   }).pipe(
     map(() => true),
     catchError(() => of(false))
@@ -43,3 +43,4 @@ checkSession(): Observable<boolean> {
 
 
 }
+ */

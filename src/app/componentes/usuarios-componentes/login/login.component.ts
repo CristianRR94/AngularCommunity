@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { passwordRepeatValidator } from '../../../directivas/password.directive';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../../servicios/auth.service';
+import { AuthServiceJWT } from '../../../servicios/auth.serviceJWT';
 import { subscribe } from 'diagnostics_channel';
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ import { subscribe } from 'diagnostics_channel';
 })
 export class LoginComponent implements OnInit{
   protected route = inject(Router);
-  private auth = inject(AuthService);
+  private auth = inject(AuthServiceJWT);
   private ruta = inject(ActivatedRoute);
   //protected formulario: FormGroup;
   ngOnInit(): void {
@@ -35,6 +35,8 @@ autenticar(){
   this.auth.login(this.autenticarse.value.username!, this.autenticarse.value.password!).subscribe(data =>{
     this.route.navigate(['signin']);
     this.onLogginSuccess();
+    console.log(this.autenticarse.value.username);
+    console.log(this.autenticarse.value.password);
     return data;
   })
 }

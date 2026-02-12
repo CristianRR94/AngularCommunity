@@ -2,35 +2,52 @@ import { AuthServiceJWT } from '../servicios/auth.serviceJWT';
 import { isPlatformServer } from '@angular/common';
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject, PLATFORM_ID } from '@angular/core';
-import { error } from 'console';
 import { catchError, switchMap, throwError } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const platformId = inject(PLATFORM_ID);
   const authService = inject(AuthServiceJWT);
+
   if(isPlatformServer(platformId)){
     return next(req);
   }
-  const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
+    const refreshToken = localStorage.getItem('refresh_token');
+// No interceptar el refresh
+  if(req.url.includes('/refresh')){
+    const refreshToken = localStorage.getItem('refresh_token');
+    const refresReq = req.clone({
+      setHeaders: {Authorization: `Bearer ${refreshToken}`}
+    });
+    return next(refresReq);
+  }
+
+  let clonedReq = req;
+
   let headers = req.headers;
 
   if(!(req.body instanceof FormData)){
-    headers = headers.set('Content-type', 'application/json');
+   clonedReq = clonedReq.clone({ setHeaders: { 'Content-Type': 'application/json' } });
   }
   if(token){
-    headers = headers.set('Authorization', `Bearer ${token}`);
+    clonedReq = clonedReq.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
   }
-  const authReq = req.clone({headers});
+ // const authReq = req.clone({headers});
 
-  return next(authReq).pipe(
+  return next(clonedReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      if(error.status === 401 || error.status === 403){
+      if(error.status === 401){
         return authService.refreshToken().pipe(
-          switchMap(newToken => {
-            localStorage.setItem('token', newToken);
-            const updateHeaders = req.headers.set('Authorization', `Bearer ${newToken}`);
-            const newRequest = req.clone({headers: updateHeaders});
-            return next(newRequest);
+          switchMap(response => {
+            // response es el TokenResponse de Java (accessToken, refreshToken)
+            localStorage.setItem('access_token', response.access_token);
+            localStorage.setItem('refresh_token', response.refresh_token);
+            console.log(response.access_token, response.refresh_token);
+
+            const retryReq = req.clone({
+              setHeaders: { Authorization: `Bearer ${response.access_token}` }
+            });
+            return next(retryReq);
           }),
           catchError(()=>{
             authService.logOut();

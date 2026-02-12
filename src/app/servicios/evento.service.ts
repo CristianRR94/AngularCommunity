@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class EventoService {
   private http = inject(HttpClient);
-  private url = 'http://localhost:8080/evento';
+  private url = 'http://localhost:8080/api/eventos';
   private baseUrl = 'http://localhost:8080';
   private formData = new FormData();
 
