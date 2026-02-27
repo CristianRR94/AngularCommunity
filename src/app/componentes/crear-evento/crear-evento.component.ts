@@ -44,10 +44,15 @@ crear(){
      return;
   }
   else if(this.form.valid){
-
+    console.log("1. Formulario válido, preparando FormData...");
     const formData = new FormData();
     const eventoJson = JSON.stringify(this.form.value);
     formData.append('evento', new Blob([eventoJson], {type: 'application/json'}));
+    console.log("2. Llamando al servicio...");
+this.subscripcion = this.eventoService.postEvento(formData).subscribe({
+    next: data => console.log("3. ¡Éxito!", data),
+    error: err => console.error("3. ¡ERROR en la petición!", err)
+});
     if(this.imagenArchivo){
       formData.append('image', this.imagenArchivo);
     }

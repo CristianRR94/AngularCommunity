@@ -19,7 +19,7 @@ export class EventoService {
   }
 
   getEventos(): Observable<Evento[]>{
-    return this.http.get<Evento[]>(`${this.url}`);
+    return this.http.get<Evento[]>(`${this.url}/mis-eventos`);
   }
 
   postEvento(formData: FormData): Observable<Evento>{
@@ -39,6 +39,6 @@ export class EventoService {
     const formData = new FormData();
     formData.append('imagen', file);
 
-    return this.http.post(this.baseUrl + '/magen', formData, {responseType: 'text'});
+    return this.http.post(this.baseUrl + '/imagen', formData, {responseType: 'text'});
   }
 }

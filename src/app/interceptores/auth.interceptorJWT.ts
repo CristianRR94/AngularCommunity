@@ -3,7 +3,6 @@ import { isPlatformServer } from '@angular/common';
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject, PLATFORM_ID } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const platformId = inject(PLATFORM_ID);
   const authService = inject(AuthServiceJWT);
@@ -33,7 +32,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     clonedReq = clonedReq.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
   }
  // const authReq = req.clone({headers});
-
+  console.log('Enviando petición a:', req.url);
+  console.log('¿Lleva Token?:', !!token);
   return next(clonedReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if(error.status === 401){
