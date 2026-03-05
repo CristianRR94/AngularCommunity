@@ -1,24 +1,19 @@
-
-import { Component, inject, OnInit, Output, PLATFORM_ID, signal } from '@angular/core';
-import { EventoService } from '../../servicios/evento.service';
-import { map, Observable, reduce } from 'rxjs';
-import { EventoComponent } from "../evento/evento.component";
-import { Evento } from '../../interfaces/evento';
-import { RouterLink } from "@angular/router";
-import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MenuPrincipalComponent } from '../menu-principal/menu-principal.component';
-
-
+import { EventoComponent } from '../evento/evento.component';
+import { EventoService } from '../../servicios/evento.service';
+import { isPlatformBrowser } from '@angular/common';
+import { Evento } from '../../interfaces/evento';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-principal',
-  imports: [EventoComponent, RouterLink, MenuPrincipalComponent],
-  templateUrl: './principal.component.html',
-  styleUrl: './principal.component.scss'
+  selector: 'app-principal-descubrir',
+  imports: [MenuPrincipalComponent, EventoComponent, RouterLink],
+  templateUrl: './principal-descubrir.component.html',
+  styleUrl: './principal-descubrir.component.scss'
 })
-export class PrincipalComponent implements OnInit{
-
-  private eventoService = inject(EventoService);
+export class PrincipalDescubrirComponent implements OnInit{
+ private eventoService = inject(EventoService);
   private platformId = inject(PLATFORM_ID);
 
 /*   protected eventos$ = this.eventoService.getEventos();
@@ -40,5 +35,4 @@ export class PrincipalComponent implements OnInit{
 
 
   }
-
 }

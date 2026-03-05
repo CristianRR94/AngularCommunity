@@ -1,0 +1,23 @@
+<header>
+  <nav id="menu">
+    <app-menu-principal></app-menu-principal>
+  </nav>
+</header>
+<main>
+    <h1>Eventos</h1>
+  <section>
+  @if (eventos.length <= 1) {
+    <h2>No tienes eventos</h2>
+  }
+  @else {
+    <div class="contenedor-eventos">
+        @for (evento of eventos; track evento.id) {
+        <app-evento class="evento" [evento]="evento" [routerLink]="['/evento', evento.id]"></app-evento>
+      }
+    </div>
+  }
+  </section>
+</main>
+<footer>
+</footer>
+

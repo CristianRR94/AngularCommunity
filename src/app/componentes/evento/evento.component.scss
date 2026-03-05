@@ -9,3 +9,11 @@ div{
   position: relative;
   flex-wrap: nowrap;
 }
+
+div>img{
+  position: relative;
+  //cambiar
+  height: 20%;
+  width: 20%;
+  background-color: yellow;
+}

@@ -36,7 +36,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   console.log('¿Lleva Token?:', !!token);
   return next(clonedReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      if(error.status === 401){
+      if(error.status === 401 ||error.status === 403){
         return authService.refreshToken().pipe(
           switchMap(response => {
             // response es el TokenResponse de Java (accessToken, refreshToken)

@@ -1,21 +1,26 @@
+<div class="principal-container">
+  <header>
+    <nav id="menu">
+      <app-menu-principal></app-menu-principal>
+    </nav>
+  </header>
 
-<div id="menu">
-  <app-menu-principal></app-menu-principal>
-</div>
-<div>
-  <h1>Eventos</h1>
-  @if (eventos.length <= 1) {
-    <h2>No tienes eventos</h2>
-  }
-  @else {
-    <div id="contenedor-eventos">
-        @for (evento of eventos; track evento.id) {
-      <div id="evento" [routerLink]="['/evento', evento.id]">
-        <app-evento [evento]="evento"></app-evento>
+  <main>
+      <h1>Eventos</h1>
+    <section>
+    @if (eventos.length <= 1) {
+      <h2>No tienes eventos</h2>
+    }
+    @else {
+      <div class="contenedor-eventos">
+          @for (evento of eventos; track evento.id) {
+          <app-evento class="evento" [evento]="evento" [routerLink]="['/evento', evento.id]"></app-evento>
+        }
       </div>
-      }
-    </div>
-  }
-
-
+    }
+    </section>
+  </main>
+  <aside></aside>
 </div>
+  <footer>
+  </footer>
