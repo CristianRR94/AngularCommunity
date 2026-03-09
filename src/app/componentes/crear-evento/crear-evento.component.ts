@@ -13,7 +13,6 @@ import { Evento } from '../../interfaces/evento';
 })
 export class CrearEventoComponent implements OnInit, OnDestroy {
 
-
   private eventoService = inject(EventoService);
   private evento: Evento;
   private fb = inject(FormBuilder);
@@ -21,6 +20,8 @@ export class CrearEventoComponent implements OnInit, OnDestroy {
   private subscripcion: Subscription;
   formData = new FormData;
   imagenArchivo : File | null = null;
+
+
     ngOnInit(): void {
       this.evento = {
         nombreEvento: '',
@@ -48,19 +49,20 @@ crear(){
     const formData = new FormData();
     const eventoJson = JSON.stringify(this.form.value);
     formData.append('evento', new Blob([eventoJson], {type: 'application/json'}));
+      if(this.imagenArchivo){
+      formData.append('image', this.imagenArchivo);
+    }
     console.log("2. Llamando al servicio...");
 this.subscripcion = this.eventoService.postEvento(formData).subscribe({
     next: data => console.log("3. ¡Éxito!", data),
     error: err => console.error("3. ¡ERROR en la petición!", err)
 });
-    if(this.imagenArchivo){
-      formData.append('image', this.imagenArchivo);
-    }
 
 
-    this.subscripcion = this.eventoService.postEvento(formData).subscribe(data => {
+
+   /*  this.subscripcion = this.eventoService.postEvento(formData).subscribe(data => {
       return this.evento = data;
-    })
+    }) */
   }
 }
 

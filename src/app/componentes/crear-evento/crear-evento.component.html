@@ -1,21 +1,44 @@
 <section>
-<form [formGroup]="form" (ngSubmit)="crear()" class="form">
-<label for="nombreEvento">Título</label>
-<input type="text" formControlName="nombreEvento" id="nombreEvento">
-<label for="tipoEvento">Tipo de evento</label>
-<input type="text" formControlName="tipoEvento" id="tipoEvento">
-<label for="fecha">Fecha del evento</label>
-<input type="date" formControlName="fechaEvento" id="fecha">
-<label for="info">Información del evento</label>
-<input type="text" formControlName="informacion" id="info">
-<label for="imagen">Imagen</label>
-<input type="file" (change)="onFileSelected($event)" #fileUpload id="imagen" accept="image/*">
-<label for="privado">Privacidad</label>
-<input type="checkbox" formControlName="privado" id="privado">
-<label for="oculto">Visibilidad</label>
-<input type="checkbox" formControlName="oculto" id="oculto">
-<label for="maxNumParticipantes">Número de Participantes</label>
-<input type="number" formControlName="maxNumParticipantes" id="maxNumParticipantes" inputmode="numeric">
-<input type="submit" value="Confirmar" id="boton">
-</form>
+  <form [formGroup]="form" (ngSubmit)="crear()" class="form">
+
+    <div class="full-width">
+      <label for="nombreEvento">Título del Evento</label>
+      <input type="text" formControlName="nombreEvento" id="nombreEvento" placeholder="Ej: Concierto de Rock">
+    </div>
+
+    <div>
+      <label for="tipoEvento">Tipo de evento</label>
+      <input type="text" formControlName="tipoEvento" id="tipoEvento">
+    </div>
+    <div>
+      <label for="fecha">Fecha del evento</label>
+      <input type="date" formControlName="fechaEvento" id="fecha">
+    </div>
+
+    <div class="full-width">
+      <label for="info">Información del evento</label>
+      <input type="text" formControlName="informacion" id="info">
+    </div>
+
+    <div class="full-width">
+      <label for="imagen">Imagen de portada</label>
+      <input type="file" (change)="onFileSelected($event)" #fileUpload id="imagen" accept="image/*">
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" formControlName="privado" id="privado">
+      <label for="privado" style="margin:0">Evento Privado</label>
+    </div>
+    <div class="checkbox-group">
+      <input type="checkbox" formControlName="oculto" id="oculto">
+      <label for="oculto" style="margin:0">Ocultar de la búsqueda</label>
+    </div>
+
+    <div class="full-width">
+      <label for="maxNumParticipantes">Número Máximo de Participantes</label>
+      <input type="number" formControlName="maxNumParticipantes" id="maxNumParticipantes">
+    </div>
+
+    <input type="submit" value="Confirmar Evento" id="boton">
+  </form>
 </section>

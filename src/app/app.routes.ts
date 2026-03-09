@@ -10,6 +10,7 @@ import { EventoDetailsComponent } from './componentes/evento-details/evento-deta
 import { AddParticipantesComponent } from './componentes/participantes-componentes/add-participantes/add-participantes.component';
 import { authGuard } from './auth.guard';
 import { PrincipalDescubrirComponent } from './componentes/principal-descubrir/principal-descubrir.component';
+import { EditarEventoComponent } from './componentes/editar-evento/editar-evento.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   {path: 'evento/:id', component: EventoDetailsComponent, canActivate: [authGuard] },
   {path: 'crear-evento', component: CrearEventoComponent, canActivate: [authGuard]},
   {path: 'descubrir', component: PrincipalDescubrirComponent, canActivate: [authGuard]},
+  {path: 'editar-evento', component: EditarEventoComponent, canActivate: [authGuard]},
 
 
   {path: 'amigos', component: AddParticipantesComponent, canActivate: [authGuard]},
